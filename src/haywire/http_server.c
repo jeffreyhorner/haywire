@@ -196,7 +196,7 @@ int hw_http_open()
             printf("TWO %d\n", rc);
         }
         
-        if (strcmp(config->balancer, "reuseport") == 0)
+        /*if (strcmp(config->balancer, "reuseport") == 0)
         {
             uv_os_fd_t fd;
             int on = 1;
@@ -210,7 +210,7 @@ int hw_http_open()
             {
                 printf("THREE %d\n", errno);
             }
-        }
+        }*/
         
         initialize_http_request_cache();
         http_request_cache_configure_listener(uv_loop, NULL);
@@ -251,7 +251,7 @@ int hw_http_open()
         
         start_connection_dispatching(UV_TCP, threads, servers, config->http_listen_address, config->http_listen_port, config->tcp_nodelay, config->listen_backlog);
     }
-    else if (listener_count > 0 && strcmp(config->balancer, "reuseport") == 0)
+    /*else if (listener_count > 0 && strcmp(config->balancer, "reuseport") == 0)
     {
         struct server_ctx* servers;
         servers = calloc(threads, sizeof(servers[0]));
@@ -266,11 +266,12 @@ int hw_http_open()
         print_configuration();
         printf("Listening...\n");
         uv_run(uv_loop, UV_RUN_DEFAULT);
-    }
+    }*/
     
     return 0;
 }
 
+/*
 void reuseport_thread_start(void *arg)
 {
     int rc;
@@ -305,7 +306,7 @@ void reuseport_thread_start(void *arg)
 
     rc = uv_run(loop, UV_RUN_DEFAULT);
     uv_loop_delete(loop);
-}
+}*/
 
 void http_stream_on_connect(uv_stream_t* stream, int status)
 {
